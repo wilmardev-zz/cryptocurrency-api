@@ -1,0 +1,28 @@
+{
+  "name": "cryptocurrency-api",
+  "version": "1.0.0",
+  "description": "API para registro de usuarios y asociación con criptomonedas, la información de criptomonedas se obtiene con base a CoinGecko (https://www.coingecko.com/en/api)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilmardev/cryptocurrency-api.git"
+  },
+  "author": "Wilmar Santiago Duque Valencia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wilmardev/cryptocurrency-api/issues"
+  },
+  "homepage": "https://github.com/wilmardev/cryptocurrency-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
