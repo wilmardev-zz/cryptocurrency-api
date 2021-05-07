@@ -6,7 +6,7 @@ class User {
     this.LastName = lastName;
     this.UserName = userName;
     this.Password = password;
-    this.Currency = currency;
+    this.Currency = currency.toUpperCase();
     this.CreatedDate = Date.now();
   }
 }

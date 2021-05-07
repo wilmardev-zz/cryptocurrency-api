@@ -6,8 +6,7 @@ const create = async (user) => {
 };
 
 const getByUserName = async (userName) => {
-  const existUser = await UserDb.find({ UserName: userName });
-  return existUser.length > 0;
+  return await UserDb.findOne({ UserName: userName }, null, { lean: true });
 };
 
 module.exports = { create, getByUserName };

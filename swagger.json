@@ -1,0 +1,313 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Cryptocurrency API",
+    "description": "",
+    "license": {
+      "name": "Wilmar Santiago Duque Valencia",
+      "url": "https://github.com/wilmardev"
+    }
+  },
+  "host": "localhost:5005",
+  "basePath": "/v1/crypto",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/values": {
+      "get": {
+        "description": "Check health API.",
+        "tags": ["Health"],
+        "operationId": "healt",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/recharge/validate/{cellphone}": {
+      "get": {
+        "description": "Validate cell phone number if exceed the limit recharges pack per day",
+        "tags": ["Recharge"],
+        "operationId": "validatecellphone",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cellphone",
+            "required": true,
+            "description": "cellphone Number",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/rechargevalidationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/recharge/validate/operator/{cellphone}": {
+      "get": {
+        "description": "validates if a cell phone belongs to the successful mobile operator",
+        "tags": ["Recharge"],
+        "operationId": "validatecellphoneOperator",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cellphone",
+            "required": true,
+            "description": "cellphone Number",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/rechargevalidationResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/badRequestcellPhoneOperatorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/definitions/internalErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "rechargevalidationResponse": {
+      "required": ["valid"],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rechargeRequest": {
+      "properties": {
+        "RechargeInfo": {
+          "properties": {
+            "TransactionId": {
+              "type": "string"
+            },
+            "IdAplicacion": {
+              "type": "string"
+            },
+            "Mobile": {
+              "type": "string"
+            },
+            "pluPaquete": {
+              "type": "string"
+            },
+            "costoPaquete": {
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "BonoInfo": {
+          "properties": {
+            "EmailComprador": {
+              "type": "string"
+            },
+            "CelularComprador": {
+              "type": "string"
+            },
+            "DocumentoComprador": {
+              "type": "number"
+            },
+            "TipoDocComprador": {
+              "type": "number"
+            },
+            "NombreComprador": {
+              "type": "string"
+            },
+            "BarrioEnvio": {
+              "type": "string"
+            },
+            "MunicipioId": {
+              "type": "number"
+            },
+            "OTPMetodoEnvio": {
+              "type": "string"
+            },
+            "OTPCodigo": {
+              "type": "number"
+            },
+            "OTPFechaEnvio": {
+              "type": "string"
+            },
+            "OTPFechaUso": {
+              "type": "string"
+            },
+            "TotalPuntosRedimidos": {
+              "type": "number"
+            },
+            "CostoEnvio": {
+              "type": "number"
+            },
+            "Channel": {
+              "type": "string"
+            },
+            "ListaProductos": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "ProductoId": {
+                    "type": "string"
+                  },
+                  "NombreProducto": {
+                    "type": "string"
+                  },
+                  "PartnerCode": {
+                    "type": "string"
+                  },
+                  "PartnerName": {
+                    "type": "string"
+                  },
+                  "LocationCode": {
+                    "type": "string"
+                  },
+                  "Cantidad": {
+                    "type": "number"
+                  },
+                  "ValorPuntos": {
+                    "type": "number"
+                  },
+                  "FechaVencimiento": {
+                    "type": "string"
+                  },
+                  "Imagen": {
+                    "type": "string"
+                  },
+                  "DescripcionProducto": {
+                    "type": "string"
+                  },
+                  "NombreEnResponsys": {
+                    "type": "string"
+                  },
+                  "TermCondiciones": {
+                    "type": "string"
+                  },
+                  "FechaExpTexto": {
+                    "type": "string"
+                  },
+                  "TipoVigencia": {
+                    "type": "number"
+                  },
+                  "TipoRedencion": {
+                    "type": "number"
+                  },
+                  "SoloEmpresas": {
+                    "type": "boolean"
+                  },
+                  "JsonInfoAdicionalValor": {
+                    "required": [
+                      "departamento",
+                      "municipio",
+                      "estaciondeservicio"
+                    ],
+                    "properties": {
+                      "departamento": {
+                        "type": "string"
+                      },
+                      "municipio": {
+                        "type": "string"
+                      },
+                      "estaciondeservicio": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "successfulRechargeResponse": {
+      "properties": {
+        "estado": {
+          "type": "string",
+          "example": "000"
+        },
+        "descripcion": {
+          "type": "string",
+          "example": "Transacción Exitosa"
+        },
+        "codigoTransaccion": {
+          "type": "string",
+          "example": "18335505"
+        }
+      }
+    },
+    "customErrorResponse": {
+      "properties": {
+        "resultCode": {
+          "type": "string",
+          "example": "BAD_REQUEST"
+        },
+        "resultMsg": {
+          "type": "string",
+          "example": "Data required is not provided"
+        }
+      }
+    },
+    "badRequestResponse": {
+      "properties": {
+        "resultCode": {
+          "type": "string",
+          "example": "CELLPHONE_NOT_EXIST"
+        },
+        "resultMsg": {
+          "type": "string",
+          "example": "Cellphone number don't exist for the operator"
+        }
+      }
+    },
+    "internalErrorResponse": {
+      "properties": {
+        "resultCode": {
+          "type": "string",
+          "example": "INTERNAL_ERROR"
+        },
+        "resultMsg": {
+          "type": "string",
+          "example": "Something went wrong. Try again please"
+        }
+      }
+    },
+    "badRequestcellPhoneOperatorResponse": {
+      "properties": {
+        "resultCode": {
+          "type": "string",
+          "example": "BAD_REQUEST"
+        },
+        "resultMsg": {
+          "type": "string",
+          "example": "Cellphone number is not provided"
+        }
+      }
+    }
+  }
+}
