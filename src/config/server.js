@@ -14,7 +14,6 @@ const run = async () => {
     res.header("Access-Control-Allow-Origin", "*");
     next();
   });
-  global.config = config;
   await mongoDb.connect();
   app.use("/v1/crypto", apiRoutes.routes());
   app.use(errorHandler);

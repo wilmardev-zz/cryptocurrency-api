@@ -4,7 +4,9 @@ const swaggerDocument = require("../../../swagger.json");
 const valuesController = require("../../controllers/values-controller");
 const loginController = require("../../controllers/login-controller");
 const userController = require("../../controllers/user-controller");
+const cryptoController = require("../../controllers/crypto-controller");
 const userMiddleware = require("../middleware/user-middleware");
+const cryptoMiddleware = require("../middleware/crypto-middleware");
 
 module.exports.routes = () => {
   const router = express.Router();
@@ -16,6 +18,18 @@ module.exports.routes = () => {
     "/user/create",
     userMiddleware.validateInput,
     userController.create
+  );
+  router.post(
+    "/create",
+    userMiddleware.validateJwt,
+    cryptoMiddleware.validateInput,
+    cryptoController.create
+  );
+  router.get(
+    "/all",
+    userMiddleware.validateJwt,
+    cryptoMiddleware.validateQuery,
+    cryptoController.get
   );
   return router;
 };

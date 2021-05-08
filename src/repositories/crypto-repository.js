@@ -1,22 +1,30 @@
 const { CryptocurrencyDb } = require("../entities/crypto-entity");
 
-const create = async (cryptocurrency) => {
-  const cryptocurrency = CryptocurrencyDb(user);
+const create = async (cryptoEntitie) => {
+  const cryptocurrency = CryptocurrencyDb(cryptoEntitie);
   return await cryptocurrency.save();
 };
 
-const getByUser = async (cryptoId, userName, order) => {
+const getByCryptoAndUser = async (cryptoId, userName) => {
   return await CryptocurrencyDb.findOne(
-    { CryptocurrencyId: cryptoId, UserName: userName },
+    { Id: cryptoId, UserName: userName },
     null,
     {
       lean: true,
     }
-  ).sort(order);
+  );
+};
+
+const getByUser = async (userName, field, order, top) => {
+  return await CryptocurrencyDb.find({ UserName: userName }, null, {
+    lean: true,
+  })
+    .sort({ [field]: order })
+    .limit(top);
 };
 
 const getQuantityByUser = async (userName) => {
   return await CryptocurrencyDb.count({ UserName: userName });
 };
 
-module.exports = { create, getByUser, getQuantityByUser };
+module.exports = { create, getByCryptoAndUser, getByUser, getQuantityByUser };

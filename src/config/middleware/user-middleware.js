@@ -1,21 +1,32 @@
+const ENV = process.env.NODE_ENV || "development";
+const { config } = require("../environments/" + ENV);
+const { Message } = require("../../entities/message-entity");
+const jwt = require("jsonwebtoken");
+
 const validateInput = async (req, res, next) => {
-  const { config } = global;
   const { password, currency } = req.body;
   const regex = new RegExp(/[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,}/);
   if (!password || !regex.test(password))
-    return res.status(400).json({
-      message: `the 'password' field must be longer than 8 characters`,
-    });
+    return res.status(400).json({ message: Message.passwordNotValid() });
   if (
     !currency ||
     !config.currencyOptions.filter(
       (op) => op.toLowerCase() === currency.toLowerCase()
     ).length > 0
   )
-    return res.status(400).json({
-      message: `the 'currency' field doesn't contain a valid option.`,
-    });
+    return res.status(400).json({ message: Message.dataNotValid("currency") });
   next();
 };
 
-module.exports = { validateInput };
+const validateJwt = async (req, res, next) => {
+  const { authorization: token } = req.headers;
+  if (!token) return res.status(401).json({ message: Message.unauthorized() });
+  jwt.verify(token, config.jwtOptions.secret, (error, decodedJwt) => {
+    if (error)
+      return res.status(403).json({ message: Message.tokenNotValid() });
+    req.headers.user = decodedJwt;
+    next();
+  });
+};
+
+module.exports = { validateInput, validateJwt };

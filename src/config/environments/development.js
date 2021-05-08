@@ -7,8 +7,17 @@ module.exports.config = {
     useUnifiedTopology: true,
   },
   currencyOptions: ["EUR", "USD", "ARS"],
+  filterDefaultOptions: {
+    topMax: 25,
+    order: "desc",
+  },
   jwtOptions: {
     secret: "2F21F277F732204CBEECF2746F8B3EE11479135A835059B4125FDDD098611911",
-    expires: 20,
+    expires: 3600, // seconds
+  },
+  coingeckoApi: {
+    baseUrl: "https://api.coingecko.com/api/v3/",
+    price: "simple/price?ids={1}&vs_currencies={2}",
+    makets: "coins/markets?vs_currency={1}&ids={2}&sparkline=false",
   },
 };

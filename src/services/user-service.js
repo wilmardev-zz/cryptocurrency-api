@@ -1,7 +1,10 @@
+const ENV = process.env.NODE_ENV || "development";
+const { config } = require("../config/environments/" + ENV);
 const jwt = require("jsonwebtoken");
-const { User } = require("../entities/user-entity");
 const userRepository = require("../repositories/user-repository");
+const { User } = require("../entities/user-entity");
 const { Unauthorize } = require("../entities/errors-entities");
+const { Message } = require("../entities/message-entity");
 
 const create = async (data) => {
   const { userName, lastName, name, password, currency } = data;
@@ -12,15 +15,13 @@ const create = async (data) => {
 };
 
 const login = async (data) => {
-  const {
-    config: { jwtOptions },
-  } = global;
+  const { jwtOptions } = config;
   const { userName, password } = data;
   const user = await userRepository.getByUserName(userName);
   if (!user || user.Password !== password)
-    throw new Unauthorize(`invalid username or password.`);
+    throw new Unauthorize(Message.loginInvalid());
   const token = jwt.sign(
-    { currency: user.currency, ...data },
+    { currency: user.Currency, userName },
     jwtOptions.secret,
     {
       expiresIn: jwtOptions.expires,
