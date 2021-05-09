@@ -1,17 +1,19 @@
 const mongoose = require("mongoose");
 
 class Cryptocurrency {
-  constructor(id, userName, cryptoInfo, cryptoPrices) {
-    this.UserName = userName;
+  constructor(id, cryptoInfo, userName, cryptoPrices) {
     this.Id = id;
     this.Name = cryptoInfo.name;
     this.Symbol = cryptoInfo.symbol;
-    this.ArsPrice = cryptoPrices.ars;
-    this.UsdPrice = cryptoPrices.usd;
-    this.EurPrice = cryptoPrices.eur;
     this.Image = cryptoInfo.image;
     this.LastUpdate = cryptoInfo.last_updated;
-    this.CreatedDate = Date.now();
+    if (cryptoPrices) {
+      this.UserName = userName;
+      this.ArsPrice = cryptoPrices.ars;
+      this.UsdPrice = cryptoPrices.usd;
+      this.EurPrice = cryptoPrices.eur;
+      this.CreatedDate = Date.now();
+    } else this.Price = cryptoInfo.current_price;
   }
 }
 
@@ -44,4 +46,8 @@ const CryptocurrencyDb = mongoose.model(
   "Cryptocurrency"
 );
 
-module.exports = { Cryptocurrency, CryptocurrencyDto, CryptocurrencyDb };
+module.exports = {
+  Cryptocurrency,
+  CryptocurrencyDto,
+  CryptocurrencyDb,
+};

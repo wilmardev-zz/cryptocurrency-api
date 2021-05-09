@@ -19,5 +19,6 @@ module.exports.config = {
     baseUrl: "https://api.coingecko.com/api/v3/",
     price: "simple/price?ids={1}&vs_currencies={2}",
     makets: "coins/markets?vs_currency={1}&ids={2}&sparkline=false",
+    list: "coins/list?include_platform=false",
   },
 };
