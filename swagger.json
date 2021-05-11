@@ -235,10 +235,12 @@
       "required": ["userName", "password"],
       "properties": {
         "userName": {
-          "type": "string"
+          "type": "string",
+          "example": "wsduquev"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "example": "Sesamo123*"
         }
       }
     },

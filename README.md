@@ -19,7 +19,6 @@ La organización de carpetas o "capas" se encuentra de la siguiente manera:
 - **routes**: Contiene el enrutamiendo API REST para los diferentes puntos de acceso que tiene la aplicación, aquí mismo se configuran los middleware que serán utilizados bien sea de manera global como específica para ciertas rutas.
 - **server.js**: Contiene la configuración a nivel del servidor de Express para el correcto funcionamiento del api, aquí se configuran diferentes características como: cors, se enlaza todo el enrutamiento de la aplicación, se inicia el proceso de conexión a base de datos, implementación de middlewares globales y levantamiento o puesta en escucha del servidor en determinado puerto, etc.
 
-
 #### **- Entities**: Contiene las clases necesarias para el funcionamiento del negocio y la definición de los modelos que se almacenarán en base de datos, esto mediante el paquete `mongoose`
 
 #### **- Adapters**: Son los agentes externos a la solución, en este caso, el consumo del REST API Coingenko: (https://www.coingecko.com/api).
@@ -59,7 +58,9 @@ La organización de carpetas o "capas" se encuentra de la siguiente manera:
 
 <br>
 
-#### **NOTA:** La aplicación se encargar de insertar automáticamente 3 registro en la colección de usuarios para su uso inmediato de las pruebas si se requiere. La información se encuentra en `src/config/database/populatedb.json`
+#### **NOTA:** La aplicación se encargar de insertar automáticamente 3 registros en la colección de usuarios para su uso inmediato de las pruebas si se requiere. La información se encuentra en `src/config/database/populatedb.json`.
+
+También por default en la documentación del recurso `user/login` están por default las credenciales para una solicitud correcta y seguir usando los demás recursos con el token generado.
 
 <br>
 
