@@ -22,4 +22,4 @@ const run = async () => {
   );
 };
 
-module.exports = { run, app };
+module.exports = { run };

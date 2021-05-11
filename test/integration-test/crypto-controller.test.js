@@ -1,27 +1,32 @@
 const chai = require("chai");
 const supertest = require("supertest");
+const axios = require("axios").default;
 const expect = chai.expect;
 const { Message } = require("../../src/entities/message-entity");
 
 describe("Integration Test: Cryptocurrency Controller", () => {
   it("Validate token is sended or malformed", async () => {
-    let result = await supertest(global.app)
-      .post("/api/v1/crypto/create")
-      .send({});
-    expect(result.statusCode).to.be.equal(401);
-    expect(result.body.message).to.be.equal(Message.unauthorized());
+    try {
+      const url = `${global.baseUrl}/crypto/create`;
+      await axios.post(url);
+    } catch ({ response }) {
+      expect(response.status).to.be.equal(401);
+      expect(response.data.message).to.be.equal(Message.unauthorized());
+    }
   });
 
   it("Validate token is invalid or expired", async () => {
-    let result = await supertest(global.app)
-      .post("/api/v1/crypto/create")
-      .set(
-        "Authorization",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXJyZW5jeSI6IkFSUyIsInVzZXJOYW1lIjoid3NkdXF1ZXYiLCJpYXQiOjE2MjA3MDM2NDUsImV4cCI6MTYyMDcwMzcwNX0.DCTq2nfjPfZTcqBP6X4vYaj85cCe_-5RbQxKLf9WqLI"
-      )
-      .send({});
-    expect(result.statusCode).to.be.equal(403);
-    expect(result.body.message).to.be.equal(Message.tokenNotValid());
+    try {
+      const headers = {
+        Authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXJyZW5jeSI6IkFSUyIsInVzZXJOYW1lIjoid3NkdXF1ZXYiLCJpYXQiOjE2MjA3MDM2NDUsImV4cCI6MTYyMDcwMzcwNX0.DCTq2nfjPfZTcqBP6X4vYaj85cCe_-5RbQxKLf9WqLI",
+      };
+      const url = `${global.baseUrl}/crypto/create`;
+      await axios.post(url, null, { headers });
+    } catch ({ response }) {
+      expect(response.status).to.be.equal(403);
+      expect(response.data.message).to.be.equal(Message.tokenNotValid());
+    }
   });
 
   it("success login and validate input params", async () => {

@@ -1,8 +1,5 @@
-const server = require("../../src/config/server");
-
 before(async () => {
-  await server.run();
-  global.app = server.app;
+  global.baseUrl = "http://localhost:5005/api/v1";
   console.log("Testing server listenting...\n");
 });
 
