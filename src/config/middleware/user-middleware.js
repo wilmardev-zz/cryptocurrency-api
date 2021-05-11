@@ -4,7 +4,9 @@ const { Message } = require("../../entities/message-entity");
 const jwt = require("jsonwebtoken");
 
 const validateInput = async (req, res, next) => {
-  const { password, currency } = req.body;
+  const { password, currency, name, lastName, userName } = req.body;
+  if (!name || !lastName || !userName || !password || !currency)
+    return res.status(400).json({ message: Message.bodyNotProvided() });
   const regex = new RegExp(/[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,}/);
   if (!password || !regex.test(password))
     return res.status(400).json({ message: Message.passwordNotValid() });

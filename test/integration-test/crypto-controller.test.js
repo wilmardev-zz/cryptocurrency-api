@@ -1,6 +1,5 @@
-const chai = require("chai");
-const supertest = require("supertest");
 const axios = require("axios").default;
+const chai = require("chai");
 const expect = chai.expect;
 const { Message } = require("../../src/entities/message-entity");
 
@@ -30,33 +29,33 @@ describe("Integration Test: Cryptocurrency Controller", () => {
   });
 
   it("success login and validate input params", async () => {
-    const token = await getToken();
-    let result = await supertest(global.app)
-      .post("/api/v1/crypto/create")
-      .set("Authorization", token)
-      .send({});
-    expect(result.statusCode).to.be.equal(400);
-    expect(result.body.message).to.be.equal(Message.dataNotProvided("id"));
+    try {
+      const url = `${global.baseUrl}/crypto/create`;
+      const token = await getToken();
+      const headers = { Authorization: token };
+      await axios.post(url, null, { headers });
+    } catch ({ response }) {
+      expect(response.status).to.be.equal(400);
+      expect(response.data.message).to.be.equal(Message.dataNotProvided("id"));
+    }
   });
 
   it("success get all cryptocurrencies", async () => {
     const token = await getToken();
-    let result = await supertest(global.app)
-      .get("/api/v1/crypto/list")
-      .set("Authorization", token)
-      .send({});
-    expect(result.statusCode).to.be.equal(200);
-    expect(result.body).not.be.null;
+    const headers = { Authorization: token };
+    const url = `${global.baseUrl}/crypto/list`;
+    let result = await axios.get(url, { headers });
+    expect(result.status).to.be.equal(200);
+    expect(result.data).not.be.null;
   });
 
   it("success get cryptocurrencies associated for an user", async () => {
     const token = await getToken();
-    let result = await supertest(global.app)
-      .get("/api/v1/crypto/user/list")
-      .set("Authorization", token)
-      .send({});
-    expect(result.statusCode).to.be.equal(200);
-    expect(result.body).not.be.null;
+    const headers = { Authorization: token };
+    const url = `${global.baseUrl}/crypto/user/list`;
+    let result = await axios.get(url, { headers });
+    expect(result.status).to.be.equal(200);
+    expect(result.data).not.be.null;
   });
 
   const getToken = async () => {
@@ -64,9 +63,8 @@ describe("Integration Test: Cryptocurrency Controller", () => {
       userName: "wsduquev",
       password: "Sesamo33*",
     };
-    const result = await supertest(global.app)
-      .post("/api/v1/user/login")
-      .send(body);
-    return result.body.token;
+    const url = `${global.baseUrl}/user/login`;
+    const { data } = await axios.post(url, body);
+    return data.token;
   };
 });

@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js app.js",
-    "test": "./node_modules/.bin/_mocha test/unit-test/",
-    "test:it": "./node_modules/.bin/_mocha test/integration-test/"
+    "test": "./node_modules/.bin/_mocha test/unit-test/ && ./node_modules/.bin/_mocha test/integration-test/",
+    "test:it": "./node_modules/.bin/_mocha test/integration-test/",
+    "test:ut": "./node_modules/.bin/_mocha test/unit-test/"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,8 @@ class Message {
   static alreadyExistCrypto = (field) =>
     `cryptocurrency '${field}' is already associated for the current user.`;
   static dataNotProvided = (field) => `the '${field}' field is not provided`;
+  static bodyNotProvided = () =>
+    `the 'body' request doesn't contain a valid data.`;
   static dataNotValid = (field) =>
     `the '${field}' query doesn't contain a valid data.`;
   static passwordNotValid = () =>

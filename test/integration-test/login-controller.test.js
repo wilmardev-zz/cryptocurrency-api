@@ -1,5 +1,5 @@
+const axios = require("axios").default;
 const chai = require("chai");
-const supertest = require("supertest");
 const expect = chai.expect;
 const { Message } = require("../../src/entities/message-entity");
 
@@ -9,30 +9,37 @@ describe("Integration Test: Login Controller", () => {
       userName: "wsduquev",
       password: "Sesamo33*",
     };
-    let result = await supertest(global.app)
-      .post("/api/v1/user/login")
-      .send(body);
-    expect(result.statusCode).to.be.equal(200);
-    expect(result.body.token).not.be.null;
+    const url = `${global.baseUrl}/user/login`;
+    const result = await axios.post(url, body);
+    expect(result.status).to.be.equal(200);
+    expect(result.data.token).not.be.null;
   });
 
   it("Failure login ", async () => {
-    const body = {
-      userName: "wsduquev",
-      password: "Sesamo3s3*",
-    };
-    let result = await supertest(global.app)
-      .post("/api/v1/user/login")
-      .send(body);
-    expect(result.statusCode).to.be.equal(401);
-    expect(result.body.message).to.be.equal(Message.loginInvalid());
+    try {
+      const body = {
+        userName: "wsduquev",
+        password: "Sesamosw33*",
+      };
+      const url = `${global.baseUrl}/user/login`;
+      await axios.post(url, body);
+    } catch ({ response }) {
+      expect(response.status).to.be.equal(401);
+      expect(response.data.message).to.be.equal(Message.loginInvalid());
+    }
   });
 
   it("Validate input data for login ", async () => {
-    let result = await supertest(global.app)
-      .post("/api/v1/user/login")
-      .send({});
-    expect(result.statusCode).to.be.equal(401);
-    expect(result.body.message).to.be.equal(Message.loginInvalid());
+    try {
+      const body = {
+        userName: "wsduquev",
+        password: "Sesamosw33*",
+      };
+      const url = `${global.baseUrl}/user/login`;
+      await axios.post(url, body);
+    } catch ({ response }) {
+      expect(response.status).to.be.equal(401);
+      expect(response.data.message).to.be.equal(Message.loginInvalid());
+    }
   });
 });
