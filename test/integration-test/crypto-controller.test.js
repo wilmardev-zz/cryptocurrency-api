@@ -61,7 +61,7 @@ describe("Integration Test: Cryptocurrency Controller", () => {
   const getToken = async () => {
     const body = {
       userName: "wsduquev",
-      password: "Sesamo33*",
+      password: "Sesamo123*",
     };
     const url = `${global.baseUrl}/user/login`;
     const { data } = await axios.post(url, body);

@@ -7,7 +7,7 @@ describe("Integration Test: Login Controller", () => {
   it("Success login ", async () => {
     const body = {
       userName: "wsduquev",
-      password: "Sesamo33*",
+      password: "Sesamo123*",
     };
     const url = `${global.baseUrl}/user/login`;
     const result = await axios.post(url, body);

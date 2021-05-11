@@ -1,0 +1,23 @@
+[
+  {
+    "name": "wilmar",
+    "lastName": "duque",
+    "userName": "wsduquev",
+    "password": "Sesamo123*",
+    "currency": "ars"
+  },
+  {
+    "name": "santi",
+    "lastName": "duque",
+    "userName": "santi123",
+    "password": "Sesamo333*",
+    "currency": "usd"
+  },
+  {
+    "name": "wsduque",
+    "lastName": "duque",
+    "userName": "duquewil123",
+    "password": "Sesamo321*",
+    "currency": "eur"
+  }
+]
