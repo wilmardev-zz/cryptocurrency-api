@@ -4,14 +4,26 @@ on:
   pull_request:
     branches: [ master, develop ]
     
-name: Main Workflow
+name: Build & Covergae
 jobs:
-  sonarcloud:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x,]
     steps:
     - uses: actions/checkout@v2
+    - name: Setup Node JS
+      uses: actions/setup-node@v2
       with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
+        node-version: ${{ matrix.node-version }}
+    - name: Generate Coverage
+      run: |
+        npm install
+        npm run test:cov
+    
+    - uses: actions/checkout@v2
+      with:
         fetch-depth: 0
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
