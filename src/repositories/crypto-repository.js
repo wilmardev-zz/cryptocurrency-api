@@ -19,8 +19,4 @@ const getByUser = async (userName, field, order, top) => {
     .limit(top);
 };
 
-const getQuantityByUser = async (userName) => {
-  return CryptocurrencyDb.count({ UserName: userName });
-};
-
-module.exports = { create, getByCryptoAndUser, getByUser, getQuantityByUser };
+module.exports = { create, getByCryptoAndUser, getByUser };

@@ -8,7 +8,19 @@ const { BadRequest, Conflict } = require("../../src/entities/errors-entities");
 const { Message } = require("../../src/entities/message-entity");
 
 describe("Unit Test: Cryptocurrency service", () => {
-  it("should returns cryptocurrency list", async () => {
+  const stubAditionalInfo = [
+    {
+      id: "0-5x-long-algorand-token",
+      symbol: "algohalf",
+      name: "0.5X Long Algorand Token",
+      image:
+        "https://assets.coingecko.com/coins/images/12009/large/683JEXMN_400x400.png?1596692452",
+      current_price: 17649.25,
+      last_updated: "2021-05-10T20:33:47.126Z",
+    },
+  ];
+
+  it("should returns all cryptocurrency list", async () => {
     const stubValue = [
       {
         id: "01coin",
@@ -30,6 +42,30 @@ describe("Unit Test: Cryptocurrency service", () => {
     expect(response[0]).to.have.property("name");
   });
 
+  it("should returns partial (top 50) cryptocurrency list", async () => {
+    const stubValue = [
+      {
+        id: "01coin",
+        symbol: "zoc",
+        name: "01coin",
+      },
+      {
+        id: "0-5x-long-algorand-token",
+        symbol: "algohalf",
+        name: "0.5X Long Algorand Token",
+      },
+    ];
+    const stub = sinon.stub(cryptoAdapter, "getAll").returns(stubValue);
+    sinon.stub(cryptoAdapter, "getAditionalInfo").returns(stubAditionalInfo);
+    const response = await cryptoService.get("ARS", false);
+    expect(stub.called).to.be.true;
+    expect(response).to.be.a("array");
+    expect(response[0]).to.have.property("Price");
+    expect(response[0]).to.have.property("Symbol");
+    expect(response[0]).to.have.property("Image");
+    expect(response[0]).to.have.property("LastUpdate");
+  });
+
   afterEach(() => sinon.restore());
 
   const inputData = {
@@ -39,17 +75,6 @@ describe("Unit Test: Cryptocurrency service", () => {
   };
 
   it("should be associate a cryptocurrency to user", async () => {
-    const stubAditionalInfo = [
-      {
-        id: "0-5x-long-algorand-token",
-        symbol: "algohalf",
-        name: "0.5X Long Algorand Token",
-        image:
-          "https://assets.coingecko.com/coins/images/12009/large/683JEXMN_400x400.png?1596692452",
-        current_price: 17649.25,
-        last_updated: "2021-05-10T20:33:47.126Z",
-      },
-    ];
     const stubAdapter = sinon
       .stub(cryptoAdapter, "getPrice")
       .returns({ bitcoin: {} });

@@ -8,7 +8,8 @@
     "dev": "./node_modules/nodemon/bin/nodemon.js app.js",
     "test": "./node_modules/.bin/_mocha test/unit-test/ && ./node_modules/.bin/_mocha test/integration-test/",
     "test:it": "./node_modules/.bin/_mocha test/integration-test/",
-    "test:ut": "./node_modules/.bin/_mocha test/unit-test/"
+    "test:ut": "./node_modules/.bin/_mocha test/unit-test/",
+    "test:cov": "nyc --reporter=lcov --reporter=text ./node_modules/.bin/_mocha test/unit-test/ && ./node_modules/.bin/_mocha test/integration-test/ --timeout 120000"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "chai": "^4.3.4",
     "mocha": "^8.4.0",
     "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
     "sinon": "^10.0.0",
     "swagger-ui-express": "^4.1.6"
   }
