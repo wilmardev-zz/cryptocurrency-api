@@ -52,7 +52,7 @@
             "description": "El usuario no está autenticado"
           },
           "500": {
-            "description": "Somenthin went wrong. Please try again"
+            "description": "Algo salió mal. Por favor intente nuevamente"
           }
         },
         "produces": ["application/json"]
@@ -70,6 +70,14 @@
             "description": "Token previamente otorgado por el sistema en el inicio de sesión",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "allData",
+            "description": "Obtener todos los datos expuesto por coingecko api con solo 3 propiedades: id, name, symbol (valor: true), aprox 7180 registros. U obtener top 50 y sumarles las propiedades: Image, LastUpdate, Price (valor: false). Valor por defecto: `true`",
+            "required": false,
+            "type": "string",
+            "enum": ["true", "false"]
           }
         ],
         "responses": {
@@ -83,7 +91,7 @@
             "description": "El usuario no está autorizado"
           },
           "500": {
-            "description": "Somenthin went wrong. Please try again"
+            "description": "Algo salió mal. Por favor intente nuevamente"
           }
         },
         "produces": ["application/json"]
@@ -115,7 +123,7 @@
             "description": "El usuario ya existe"
           },
           "500": {
-            "description": "Somenthin went wrong. Please try again"
+            "description": "Algo salió mal. Por favor intente nuevamente"
           }
         },
         "produces": ["application/json"]
@@ -165,7 +173,7 @@
             "description": "La criptomoneda ya se encuentra asociada al usuario"
           },
           "500": {
-            "description": "Somenthin went wrong. Please try again"
+            "description": "Algo salió mal. Por favor intente nuevamente"
           }
         },
         "produces": ["application/json"]
@@ -214,7 +222,7 @@
             "description": "El usuario no está autorizado"
           },
           "500": {
-            "description": "Somenthin went wrong. Please try again"
+            "description": "Algo salió mal. Por favor intente nuevamente"
           }
         },
         "produces": ["application/json"]

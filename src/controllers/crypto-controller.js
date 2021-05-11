@@ -3,7 +3,8 @@ const cryptoService = require("../services/crypto-service");
 const get = async (req, res, next) => {
   try {
     const { user } = req.headers;
-    const response = await cryptoService.get(user.currency);
+    const allData = req.query.allData !== "false";
+    const response = await cryptoService.get(user.currency, allData);
     return res.status(200).json(response);
   } catch (error) {
     next(error);

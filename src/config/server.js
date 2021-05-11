@@ -13,7 +13,7 @@ app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: false, limit: "20mb" }));
 
 const run = async () => {
-  mongoDb.connect();
+  await mongoDb.connect();
   app.use("/api/v1", apiRoutes.routes());
   app.use("/api/v1/crypto", validateJwt, apiRoutes.authRoutes());
   app.use(errorHandler);

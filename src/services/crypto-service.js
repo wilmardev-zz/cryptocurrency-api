@@ -16,7 +16,7 @@ const health = async () => {
 /**
  * Get all cryptocurrency data (7000+)
  * @param {String} currency currency of the user [ARS, USD, EUR]
- * @param {Boolean} allData flag for get all adicional info for the cryptocurrency. Default `false`
+ * @param {Boolean} allData flag for get all adicional info for the cryptocurrency. Default `true`
  * @returns
  */
 const get = async (currency, allData = true) => {
