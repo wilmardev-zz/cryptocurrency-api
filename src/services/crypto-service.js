@@ -10,7 +10,7 @@ const cryptoAdapter = require("../adapters/crypto-adapter");
 const cryptoRepository = require("../repositories/crypto-repository");
 
 const health = async () => {
-  return await cryptoAdapter.health();
+  return cryptoAdapter.health();
 };
 
 /**
@@ -21,7 +21,7 @@ const health = async () => {
  */
 const get = async (currency, allData = true) => {
   const cryptoList = await cryptoAdapter.getAll();
-  if (!allData) return await getInfoAdicionalList(cryptoList, currency);
+  if (!allData) return getInfoAdicionalList(cryptoList, currency);
   return cryptoList;
 };
 
@@ -54,7 +54,7 @@ const create = async (data) => {
   if (existCrypto) throw new Conflict(Message.alreadyExistCrypto(id));
   const cryptoInfo = (await cryptoAdapter.getAditionalInfo(id, currency))[0];
   const crypto = new Cryptocurrency(id, cryptoInfo, userName, cryptoPrice[id]);
-  return await cryptoRepository.create(crypto);
+  return cryptoRepository.create(crypto);
 };
 
 const getByUser = async (userName, currency, order, top) => {

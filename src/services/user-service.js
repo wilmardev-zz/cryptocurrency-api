@@ -11,7 +11,7 @@ const create = async (data) => {
   const userResponse = await userRepository.getByUserName(userName);
   if (userResponse) throw new Conflict(Message.userExist(userName));
   const user = new User(name, lastName, userName, password, currency);
-  return await userRepository.create(user);
+  return userRepository.create(user);
 };
 
 const login = async (data) => {
