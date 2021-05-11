@@ -6,7 +6,7 @@ const userRepository = require("../../src/repositories/user-repository");
 const { Unauthorize, Conflict } = require("../../src/entities/errors-entities");
 const { Message } = require("../../src/entities/message-entity");
 
-describe("User service", () => {
+describe("Unit Test: User service", () => {
   const createInputData = {
     name: "camilo",
     lastName: "duque",

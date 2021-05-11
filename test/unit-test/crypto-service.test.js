@@ -7,7 +7,7 @@ const cryptoRepository = require("../../src/repositories/crypto-repository");
 const { BadRequest, Conflict } = require("../../src/entities/errors-entities");
 const { Message } = require("../../src/entities/message-entity");
 
-describe("Cryptocurrency service", () => {
+describe("Unit Test: Cryptocurrency service", () => {
   it("should returns cryptocurrency list", async () => {
     const stubValue = [
       {
