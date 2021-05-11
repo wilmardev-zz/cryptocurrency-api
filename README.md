@@ -89,9 +89,7 @@ La organización de carpetas o "capas" se encuentra de la siguiente manera:
 
 <br>
 
-#### **NOTA:** Para las pruebas se utilizó `mocha` como marco de pruebas, `chai` como librería de aserciones, `sinon` como librería para la creación de mocks y `nyc` para la generación de reporte de cobertura.
-
-#### **7.** Para terminar su ejecución, ejecutar el comando `docker-compose down`
+#### **NOTA:** Para las pruebas se utilizó `mocha` como marco de pruebas, `chai` como librería de aserciones, `sinon` como librería para la creación de mocks y `nyc` para la generación del reporte de cobertura.
 
 <br>
 

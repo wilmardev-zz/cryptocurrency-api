@@ -7,7 +7,8 @@ yarn-error.log*
 lerna-debug.log*
 
 # visual studio debug
-# .vscode/
+.vscode
+.github
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -22,7 +23,8 @@ pids
 lib-cov
 
 # Coverage directory used by tools like istanbul
-coverage/lcov-report
+coverage
+*.lcov
 
 # nyc test coverage
 .nyc_output
