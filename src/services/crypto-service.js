@@ -9,13 +9,31 @@ const { BadRequest, Conflict } = require("../entities/errors-entities");
 const cryptoAdapter = require("../adapters/crypto-adapter");
 const cryptoRepository = require("../repositories/crypto-repository");
 
-const get = async (currency = "ars") => {
-  return await cryptoAdapter.getAll();
-  return await getInfoAdicionalList(cryptoList, currency);
+const health = async () => {
+  return await cryptoAdapter.health();
 };
 
+/**
+ * Get all cryptocurrency data (7000+)
+ * @param {String} currency currency of the user [ARS, USD, EUR]
+ * @param {Boolean} allData flag for get all adicional info for the cryptocurrency. Default `false`
+ * @returns
+ */
+const get = async (currency, allData = true) => {
+  const cryptoList = await cryptoAdapter.getAll();
+  if (!allData) return await getInfoAdicionalList(cryptoList, currency);
+  return cryptoList;
+};
+
+/**
+ * Get info adicional foreach crypto. Warning to use: The server api has limit for 60 request per minute!
+ * @param {Array} cryptoList List of all cryptocurrencies (7000+)
+ * @param {String} currency currency of the user [ARS, USD, EUR]
+ * @returns
+ */
 const getInfoAdicionalList = async (cryptoList, currency) => {
   const response = [];
+  cryptoList = cryptoList.slice(0, 10);
   for await (const item of cryptoList) {
     const cryptoInfo = (
       await cryptoAdapter.getAditionalInfo(item.id, currency)
@@ -49,4 +67,4 @@ const getByUser = async (userName, currency, order, top) => {
   return response;
 };
 
-module.exports = { create, getByUser, get };
+module.exports = { health, get, create, getByUser };

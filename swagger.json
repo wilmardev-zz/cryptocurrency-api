@@ -47,6 +47,12 @@
             "schema": {
               "$ref": "#/definitions/TokenResponse"
             }
+          },
+          "401": {
+            "description": "El usuario no está autenticado"
+          },
+          "500": {
+            "description": "Somenthin went wrong. Please try again"
           }
         },
         "produces": ["application/json"]
@@ -57,9 +63,27 @@
         "summary": "Retorna las criptomonedas disponibles (Datos proporcionados por coingecko)",
         "consumes": ["application/json"],
         "tags": ["Cryptocurrency"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Token previamente otorgado por el sistema en el inicio de sesión",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "El usuario no está autenticado"
+          },
+          "403": {
+            "description": "El usuario no está autorizado"
+          },
+          "500": {
+            "description": "Somenthin went wrong. Please try again"
           }
         },
         "produces": ["application/json"]
@@ -89,6 +113,9 @@
           },
           "409": {
             "description": "El usuario ya existe"
+          },
+          "500": {
+            "description": "Somenthin went wrong. Please try again"
           }
         },
         "produces": ["application/json"]
@@ -129,10 +156,16 @@
             "description": "La información enviada es incorrecta"
           },
           "401": {
+            "description": "El usuario no está autenticado"
+          },
+          "403": {
             "description": "El usuario no está autorizado"
           },
           "409": {
             "description": "La criptomoneda ya se encuentra asociada al usuario"
+          },
+          "500": {
+            "description": "Somenthin went wrong. Please try again"
           }
         },
         "produces": ["application/json"]
@@ -173,6 +206,15 @@
           },
           "400": {
             "description": "La información enviada es incorrecta"
+          },
+          "401": {
+            "description": "El usuario no está autenticado"
+          },
+          "403": {
+            "description": "El usuario no está autorizado"
+          },
+          "500": {
+            "description": "Somenthin went wrong. Please try again"
           }
         },
         "produces": ["application/json"]

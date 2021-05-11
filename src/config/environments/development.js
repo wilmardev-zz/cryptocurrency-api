@@ -13,12 +13,13 @@ module.exports.config = {
   },
   jwtOptions: {
     secret: "2F21F277F732204CBEECF2746F8B3EE11479135A835059B4125FDDD098611911",
-    expires: 3600, // seconds
+    expires: 60, // seconds
   },
   coingeckoApi: {
     baseUrl: "https://api.coingecko.com/api/v3/",
     price: "simple/price?ids={1}&vs_currencies={2}",
     makets: "coins/markets?vs_currency={1}&ids={2}&sparkline=false",
     list: "coins/list?include_platform=false",
+    health: "ping",
   },
 };

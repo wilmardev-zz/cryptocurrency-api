@@ -23,7 +23,9 @@ const validateJwt = async (req, res, next) => {
   if (!token) return res.status(401).json({ message: Message.unauthorized() });
   jwt.verify(token, config.jwtOptions.secret, (error, decodedJwt) => {
     if (error)
-      return res.status(403).json({ message: Message.tokenNotValid() });
+      if (error.name === "TokenExpiredError")
+        return res.status(403).json({ message: Message.tokenNotValid() });
+      else return res.status(401).json({ message: Message.unauthorized() });
     req.headers.user = decodedJwt;
     next();
   });

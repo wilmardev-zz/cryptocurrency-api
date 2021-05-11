@@ -19,13 +19,13 @@ const routes = () => {
     userMiddleware.validateInput,
     userController.create
   );
-  router.get("/crypto/list", cryptoController.get);
 
   return router;
 };
 
 const authRoutes = () => {
   const router = express.Router();
+  router.get("/list", cryptoController.get);
   router.post(
     "/create",
     cryptoMiddleware.validateInput,

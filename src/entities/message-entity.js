@@ -11,6 +11,7 @@ class Message {
   static tokenNotValid = () => `Token is not valid or has been expired`;
   static loginInvalid = () => `invalid username or password.`;
   static userExist = (userName) => `UserName '${userName}' already exist.`;
+  static generalError = () => "Somenthin went wrong. Please try again";
 }
 
 module.exports = { Message };

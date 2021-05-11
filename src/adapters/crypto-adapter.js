@@ -2,6 +2,11 @@ const ENV = process.env.NODE_ENV || "development";
 const { config } = require("../config/environments/" + ENV);
 const baseAdapter = require("./base-adapter");
 
+const health = async () => {
+  const url = `${config.coingeckoApi.baseUrl}${config.coingeckoApi.health}`;
+  return await baseAdapter.get(url);
+};
+
 const getAll = async () => {
   const url = `${config.coingeckoApi.baseUrl}${config.coingeckoApi.list}`;
   return await baseAdapter.get(url);
@@ -21,4 +26,4 @@ const getAditionalInfo = async (cryptoId, currency) => {
   return await baseAdapter.get(url);
 };
 
-module.exports = { getPrice, getAditionalInfo, getAll };
+module.exports = { health, getAll, getPrice, getAditionalInfo };
