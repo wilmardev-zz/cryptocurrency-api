@@ -19,28 +19,18 @@ La organización de carpetas o "capas" se encuentra de la siguiente manera:
 - **routes**: Contiene el enrutamiendo API REST para los diferentes puntos de acceso que tiene la aplicación, aquí mismo se configuran los middleware que serán utilizados bien sea de manera global como específica para ciertas rutas.
 - **server.js**: Contiene la configuración a nivel del servidor de Express para el correcto funcionamiento del api, aquí se configuran diferentes características como: cors, se enlaza todo el enrutamiento de la aplicación, se inicia el proceso de conexión a base de datos, implementación de middlewares globales y levantamiento o puesta en escucha del servidor en determinado puerto, etc.
 
-<br>
 
 #### **- Entities**: Contiene las clases necesarias para el funcionamiento del negocio y la definición de los modelos que se almacenarán en base de datos, esto mediante el paquete `mongoose`
-
-<br>
 
 #### **- Adapters**: Son los agentes externos a la solución, en este caso, el consumo del REST API Coingenko: (https://www.coingecko.com/api).
 
 - Permite su desacoplamiento del tal modo que si a futuro se require cambiar la fuente de datos, solo se modificarán las implementaciones en los adaptadores y la lógica de negocio deberá seguir compacta.
-  <br>
 
 #### **- Repositories**: Son los encargados del acceso hacia la capa de datos, en este caso, hacia MongoDb: así mismo, como la capa de los adaptadores, permite su desacoplamiento permitiendo que el almacenamiento de datos pueda modificarse sin implicar cambios en el negocio.
 
-<br>
-
 #### **- Services**: Aquí se implementa toda la lógica de negocio requerida, adicional es donde las pruebas se centrarán sin depender de las fuentes de datos haciendo el uso de respectivos mocks.
 
-<br>
-
 #### **- Controllers**: Se encuentran los puntos de acceso encargados de recibir, delegar funciones y retornar una respectiva respuesta al cliente.
-
-<br>
 
 #### **- Test**: Se encuentran las pruebas realizadas para la aplicación
 
