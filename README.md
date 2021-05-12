@@ -58,9 +58,11 @@ La organización de carpetas o "capas" se encuentra de la siguiente manera:
 
 <br>
 
-#### **NOTA:** La aplicación se encargar de insertar automáticamente 3 registros en la colección de usuarios para su uso inmediato de las pruebas si se requiere. La información se encuentra en `src/config/database/populatedb.json`.
+#### **NOTAS:**
 
-También por default en la documentación del recurso `user/login` están por default las credenciales para una solicitud correcta y seguir usando los demás recursos con el token generado.
+#### **1.** Se recomienda primero usar el recurso `/user/create` con la información por defecto que se encuentra en el swagger, posteriormente también por default en la documentación del recurso `/user/login` están las credenciales para una solicitud correcta y seguir usando los demás recursos con el token generado.
+
+#### **2.** También se puede depurar la aplicación sin necesidad de docker. comando a ejecutar: `node app.js`
 
 <br>
 

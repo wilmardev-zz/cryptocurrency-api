@@ -257,16 +257,20 @@
       "required": ["name", "lastName", "userName", "password", "currency"],
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "example": "wilmar"
         },
         "lastName": {
-          "type": "string"
+          "type": "string",
+          "example": "wilmar"
         },
         "userName": {
-          "type": "string"
+          "type": "string",
+          "example": "wsduquev"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "example": "Sesamo123*"
         },
         "currency": {
           "type": "string",
